@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Informática</title>
+    <link rel="stylesheet" href="xulaestilo.css">
+</head>
+<body>
+    <header>
+        <h1>Tienda de Informática</h1>
+    </header>
+    <main>
+        <section class="products">
+            <h2>Productos Disponibles</h2>
+
+            <!-- Barra de búsqueda -->
+            <input type="text" id="searchInput" placeholder="Buscar producto..." />
+
+            <div id="productList" class="product-grid">
+                <!-- Los productos se cargarán aquí -->
+            </div>
+
+            <!-- Paginación -->
+            <div id="pagination" class="pagination"></div>
+
+            <h2>Agregar Producto</h2>
+            <form id="productForm">
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" required>
+                <label for="price">Precio:</label>
+                <input type="number" id="price" required>
+                <label for="image">URL de la Imagen:</label>
+                <input type="text" id="image" required>
+                <button type="submit">Agregar Producto</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Tienda de Informática - Todos los derechos reservados</p>
+    </footer>
+    <script src="xulajava.js"></script>
+</body>
+</html>
