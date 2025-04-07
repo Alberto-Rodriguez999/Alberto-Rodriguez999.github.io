@@ -1,15 +1,15 @@
-/*[
-    { "name": "Portátil Gaming Asus ROG Strix SCAR 17", "price": 1200, "image": "https://imggraficos.gruporeforma.com/2022/05/Laptops-gamer-asus-hot-sale-2022-2.png" },
-    { "name": "Teclado Mecánico Ozone x30", "price": 100, "image": "https://m.media-amazon.com/images/I/614OxJcFPDL.jpg" },
-    { "name": "Monitor 24\" LED", "price": 200, "image": "monitor.jpg" },
-    { "name": "Mouse Gamer", "price": 50, "image": "mouse.jpg" },
-    { "name": "Auriculares Inalámbricos Logitech G733 LightSpeed", "price": 80, "image": "https://m.media-amazon.com/images/I/71xNjrzG69L._AC_UF1000,1000_QL80_.jpg" },
-    { "name": "Disco SSD 1TB", "price": 150, "image": "https://img.pccomponentes.com/articles/1043/10431029/1585-wd-blue-sa510-25-1tb-ssd-sata-3.jpg" },
-    { "name": "Memoria RAM 16GB", "price": 90, "image": "https://www.vsgamers.es/thumbnails/product_gallery_large/uploads/products/g-skill/memoria/trident-z-rgb-ddr4-3000-16gb-cl15/galeria/memoria-gskill-trident-z-rgb-ddr4-3000-pc4-24000-16gb-galeria.jpg" },
-    { "name": "Placa Base ATX", "price": 130, "image": "https://m.media-amazon.com/images/I/71cpPZzlMnL.jpg" },
-    { "name": "Silla Gamer", "price": 180, "image": "https://m.media-amazon.com/images/I/61L7ONNfOwL._AC_UF894,1000_QL80_.jpg" },
-    { "name": "Caja Torre RGB", "price": 70, "image": "https://img.dynos.es/img/5033d/9b498/EV9L6O2V0E0H0P-0.jpg" }
+[
+    { "name": "Portátil Gaming Asus ROG Strix SCAR 17", "price": 1200},
+    { "name": "Teclado Mecánico Ozone x30", "price": 100},
+    { "name": "Monitor 24\" LED", "price": 200},
+    { "name": "Mouse Gamer", "price": 50},
+    { "name": "Auriculares Inalámbricos Logitech G733 LightSpeed", "price": 80},
+    { "name": "Disco SSD 1TB", "price": 150},
+    { "name": "Memoria RAM 16GB", "price": 90},
+    { "name": "Placa Base ATX", "price": 130},
+    { "name": "Silla Gamer", "price": 180},
+    { "name": "Caja Torre RGB", "price": 70}
 ]
-    */
+    
 
 
