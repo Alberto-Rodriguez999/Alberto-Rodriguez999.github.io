@@ -6,7 +6,7 @@
     { "name": "Adaptador MiniJack-Jack", "price": 2, "image": "adaptador.jpg"},
     { "name": "Steam Deck 256", "price": 360, "image": "decksteam.jpg"},
     { "name": "Stardew Valley Collectors Edition", "price": 60, "image": "stardew.jpg"},
-    { "name": "Nvidia RTX 2060 Super", "price": 280, "image": "2060S.jpg"},
+    { "name": "Nvidia RTX 2060 Super", "price": 280, "image": "tarjeta.jpg"},
     { "name": "Caja Torre RGB", "price": 70, "image": "caja.jpg"}
 ]
     
