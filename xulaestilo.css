@@ -1,0 +1,89 @@
+/* Estilos generales */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #111; /* Texto con alto contraste */
+  }
+  
+  /* Header con buen contraste */
+  header {
+    background-color: #005a99; /* Color con contraste alto */
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Footer también con buen contraste */
+  footer {
+    background-color: #111;
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    margin-top: 40px;
+  }
+  
+  /* Contenedor principal */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Estilos de tarjetas de productos */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  
+  .product-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  
+  .product-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Imágenes con tamaño definido para evitar layout shifts */
+  .product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    display: block;
+  }
+  
+  /* Título del producto */
+  .product-card h3 {
+    font-size: 1.2rem;
+    margin: 10px;
+    color: #111; /* Asegura buen contraste */
+  }
+  
+  /* Precio */
+  .product-card p {
+    font-size: 1rem;
+    margin: 10px;
+    font-weight: bold;
+    color: #222; /* Buen contraste */
+  }
+  
+  /* Responsive: Mejora para pantallas pequeñas */
+  @media (max-width: 600px) {
+    .product-card img {
+      height: 160px;
+    }
+  
+    .product-card h3 {
+      font-size: 1rem;
+    }
+  
+    .product-card p {
+      font-size: 0.9rem;
+    }
+  }
+  
