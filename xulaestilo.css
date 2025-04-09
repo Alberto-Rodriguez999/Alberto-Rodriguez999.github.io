@@ -1,4 +1,3 @@
-
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -7,7 +6,7 @@ body {
 }
 
 header {
-    background-color: #0056b3; /* Contraste mejorado */
+    background-color: #0056b3;
     color: white;
     text-align: center;
     padding: 20px;
@@ -31,13 +30,16 @@ header {
     width: 200px;
 }
 
+/* ✅ Reservar espacio fijo para las imágenes */
 .product-card img {
     width: 100%;
+    height: 200px;
+    object-fit: cover;
     border-radius: 5px;
 }
 
 button {
-    background-color: #0056b3; /* Contraste mejorado */
+    background-color: #0056b3;
     color: white;
     border: none;
     padding: 10px;
@@ -47,15 +49,17 @@ button {
 }
 
 button:hover {
-    background-color: #003f7f; /* Aún más oscuro para hover */
+    background-color: #003f7f;
 }
 
+/* ✅ Reservar espacio para el footer */
 footer {
     background-color: #333;
     color: white;
     text-align: center;
     padding: 10px;
     margin-top: 20px;
+    min-height: 60px;
 }
 
 /* Barra de búsqueda */
@@ -83,12 +87,12 @@ footer {
     margin: 5px;
     padding: 8px 12px;
     border: none;
-    background-color: #0056b3; /* Contraste mejorado */
+    background-color: #0056b3;
     color: white;
     cursor: pointer;
     border-radius: 5px;
 }
 
 .pagination button.active {
-    background-color: #003f7f; /* Aún más oscuro para la clase active */
+    background-color: #003f7f;
 }
