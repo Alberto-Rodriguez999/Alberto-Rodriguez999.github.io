@@ -1,44 +1,47 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda de Informática</title>
-    <link rel="stylesheet" href="xulaestilo.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tienda de Informática</title>
+  <link rel="stylesheet" href="estilo.css" />
+
+  <!-- Precarga de imágenes clave para mejorar CLS -->
+  <link rel="preload" href="imagenes/consola.jpg" as="image">
+  <link rel="preload" href="imagenes/microfono.jpg" as="image">
 </head>
 <body>
-    <header>
-        <h1>Tienda de Informática</h1>
-    </header>
-    <main>
-        <section class="products">
-            <h2>Productos Disponibles</h2>
+  <header>
+    <h1>Tienda de Informática</h1>
+  </header>
 
-            <!-- Barra de búsqueda -->
-            <input type="text" id="searchInput" placeholder="Buscar producto..." />
+  <main>
+    <section class="product-container">
 
-            <div id="productList" class="product-grid">
-                <!-- Los productos se cargarán aquí -->
-            </div>
+      <div class="product-card">
+        <img src="imagenes/consola.jpg" alt="Consola Nintendo Switch 2" width="200" height="200">
+        <h3>Consola Nintendo Switch 2</h3>
+        <p>$460</p>
+      </div>
 
-            <!-- Paginación -->
-            <div id="pagination" class="pagination"></div>
+      <div class="product-card">
+        <img src="imagenes/microfono.jpg" alt="Micrófono Scarlett 2i2" width="200" height="200">
+        <h3>Micrófono Scarlett 2i2</h3>
+        <p>$100</p>
+      </div>
 
-            <h2>Agregar Producto</h2>
-            <form id="productForm">
-                <label for="name">Nombre:</label>
-                <input type="text" id="name" required>
-                <label for="price">Precio:</label>
-                <input type="number" id="price" required>
-                <label for="image">URL de la Imagen:</label>
-                <input type="text" id="image" required>
-                <button type="submit">Agregar Producto</button>
-            </form>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2025 Tienda de Informática - Todos los derechos reservados</p>
-    </footer>
-    <script src="xulajava.js"></script>
+      <div class="product-card">
+        <img src="imagenes/auriculares.jpg" alt="Auriculares Gamer RGB" width="200" height="200">
+        <h3>Auriculares Gamer RGB</h3>
+        <p>$75</p>
+      </div>
+
+      <!-- Añade más productos siguiendo el mismo formato -->
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Tienda de Informática</p>
+  </footer>
 </body>
 </html>
