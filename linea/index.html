@@ -103,42 +103,50 @@
       const response = await fetch('data.json');
       const data = await response.json();
 
+      // Gráficos bajo "Ventas"
       new Chart(document.getElementById('pieChart').getContext('2d'), {
         type: 'pie',
-        data: data.pieChart,
+        data: data["Ventas"].pieChart,
         options: { responsive: true }
       });
 
       new Chart(document.getElementById('lineChart').getContext('2d'), {
         type: 'line',
-        data: data.lineChart,
+        data: data["Ventas"].lineChart,
         options: { 
           responsive: true,
           scales: { y: { beginAtZero: true } }
         }
       });
 
-      new Chart(document.getElementById('barChart').getContext('2d'), {
-        type: 'bar',
-        data: data.barChart,
-        options: { 
-          responsive: true,
-          scales: { y: { beginAtZero: true } }
-        }
-      });
-
+      // Gráfico bajo "Rendimiento de Jugadores"
       new Chart(document.getElementById('radarChart').getContext('2d'), {
         type: 'radar',
-        data: data.radarChart,
+        data: data["Rendimiento de Jugadores"].radarChart,
         options: { 
           responsive: true,
-          scale: { ticks: { beginAtZero: true, max: 100 } }
+          scales: {
+            r: {
+              beginAtZero: true,
+              max: 100
+            }
+          }
+        }
+      });
+
+      // Gráficos bajo "Estadísticas de Ventas"
+      new Chart(document.getElementById('barChart').getContext('2d'), {
+        type: 'bar',
+        data: data["Estadísticas de Ventas"].barChart,
+        options: { 
+          responsive: true,
+          scales: { y: { beginAtZero: true } }
         }
       });
 
       new Chart(document.getElementById('scatterChart').getContext('2d'), {
         type: 'scatter',
-        data: data.scatterChart,
+        data: data["Estadísticas de Ventas"].scatterChart,
         options: { 
           responsive: true,
           scales: { 
