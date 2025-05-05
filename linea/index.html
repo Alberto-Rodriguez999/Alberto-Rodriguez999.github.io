@@ -9,27 +9,65 @@
     body {
       font-family: Arial, sans-serif;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
       background-color: #f4f4f4;
       margin: 0;
-      flex-direction: column;
+      padding: 20px;
+    }
+
+    .chart-container {
+      width: 100%;
+      max-width: 600px;
+      margin: 20px 0;
     }
 
     canvas {
+      width: 100% !important;
+      height: auto !important;
       border: 2px solid #ccc;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      margin: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    .category {
+      margin-bottom: 40px;
     }
   </style>
 </head>
 <body>
-  <canvas id="pieChart" width="400" height="200"></canvas>
-  <canvas id="lineChart" width="400" height="200"></canvas>
-  <canvas id="barChart" width="400" height="200"></canvas>
-  <canvas id="radarChart" width="400" height="200"></canvas>
-  <canvas id="scatterChart" width="400" height="200"></canvas>
+  <div class="category">
+    <h2>Ventas</h2>
+    <div class="chart-container">
+      <canvas id="pieChart"></canvas>
+    </div>
+    <div class="chart-container">
+      <canvas id="lineChart"></canvas>
+    </div>
+  </div>
+
+  <div class="category">
+    <h2>Rendimiento de Jugadores</h2>
+    <div class="chart-container">
+      <canvas id="radarChart"></canvas>
+    </div>
+  </div>
+
+  <div class="category">
+    <h2>Estadísticas de Ventas</h2>
+    <div class="chart-container">
+      <canvas id="barChart"></canvas>
+    </div>
+    <div class="chart-container">
+      <canvas id="scatterChart"></canvas>
+    </div>
+  </div>
 
   <script>
     // Función para cargar el archivo JSON
@@ -47,25 +85,40 @@
       new Chart(document.getElementById('lineChart').getContext('2d'), {
         type: 'line',
         data: data.lineChart,
-        options: { responsive: true, scales: { y: { beginAtZero: true } } }
+        options: { 
+          responsive: true,
+          scales: { y: { beginAtZero: true } }
+        }
       });
 
       new Chart(document.getElementById('barChart').getContext('2d'), {
         type: 'bar',
         data: data.barChart,
-        options: { responsive: true, scales: { y: { beginAtZero: true } } }
+        options: { 
+          responsive: true,
+          scales: { y: { beginAtZero: true } }
+        }
       });
 
       new Chart(document.getElementById('radarChart').getContext('2d'), {
         type: 'radar',
         data: data.radarChart,
-        options: { responsive: true, scale: { ticks: { beginAtZero: true, max: 100 } } }
+        options: { 
+          responsive: true,
+          scale: { ticks: { beginAtZero: true, max: 100 } }
+        }
       });
 
       new Chart(document.getElementById('scatterChart').getContext('2d'), {
         type: 'scatter',
         data: data.scatterChart,
-        options: { responsive: true, scales: { x: { title: { display: true, text: 'Tiempo (meses)' } }, y: { title: { display: true, text: 'Ventas' } } } }
+        options: { 
+          responsive: true,
+          scales: { 
+            x: { title: { display: true, text: 'Tiempo (meses)' } },
+            y: { title: { display: true, text: 'Ventas' } }
+          }
+        }
       });
     }
 
