@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gráficos con Chart.js</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f9f9f9;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .grafico-container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Distribución de Géneros Literarios</h2>
+
+  <div class="grafico-container">
+    <canvas id="grafico-generos"></canvas>
+  </div>
+
+  <script>
+    fetch('datos.json')
+      .then(response => response.json())
+      .then(data => {
+        const etiquetas = data.map(item => item.genero);
+        const valores = data.map(item => item.cantidad);
+
+        const ctx = document.getElementById('grafico-generos').getContext('2d');
+        new Chart(ctx, {
+          type: 'bar', // Puedes cambiar a 'pie', 'line', etc.
+          data: {
+            labels: etiquetas,
+            datasets: [{
+              label: 'Cantidad de obras',
+              data: valores,
+              backgroundColor: ['#4a6fa5', '#3498db', '#9b59b6', '#e67e22'],
+              borderColor: '#333',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: { display: false },
+              tooltip: { enabled: true }
+            },
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      })
+      .catch(error => {
+        console.error('Error al cargar el archivo JSON:', error);
+      });
+  </script>
+
+</body>
+</html>
