@@ -1,57 +1,63 @@
 {
-  "lineChart": {
-    "labels": ["Ene", "Feb", "Mar", "Abr", "May", "Jun"],
-    "datasets": [{
-      "label": "Ventas Mensuales",
-      "data": [30, 50, 40, 60, 80, 90],
-      "borderColor": "rgba(75, 192, 192, 1)",
-      "backgroundColor": "rgba(75, 192, 192, 0.2)",
-      "fill": true
-    }]
+  "Ventas": {
+    "lineChart": {
+      "labels": ["Ene", "Feb", "Mar", "Abr", "May", "Jun"],
+      "datasets": [{
+        "label": "Ventas Mensuales",
+        "data": [30, 50, 40, 60, 80, 90],
+        "borderColor": "rgba(75, 192, 192, 1)",
+        "backgroundColor": "rgba(75, 192, 192, 0.2)",
+        "fill": true
+      }]
+    },
+    "pieChart": {
+      "labels": ["Electrónica", "Ropa", "Alimentos", "Juguetes"],
+      "datasets": [{
+        "label": "Distribución de Ventas",
+        "data": [55, 25, 10, 10],
+        "backgroundColor": ["#FF6347", "#4CAF50", "#FF9800", "#2196F3"]
+      }]
+    }
   },
-  "barChart": {
-    "labels": ["A", "B", "C", "D"],
-    "datasets": [{
-      "label": "Calificación por Categoría",
-      "data": [80, 90, 70, 85],
-      "backgroundColor": ["#FF5733", "#33FF57", "#3357FF", "#FF33A8"]
-    }]
+  "Rendimiento de Jugadores": {
+    "radarChart": {
+      "labels": ["Velocidad", "Fuerza", "Agilidad", "Resistencia", "Técnica"],
+      "datasets": [{
+        "label": "Jugador A",
+        "data": [80, 90, 70, 85, 95],
+        "backgroundColor": "rgba(0, 123, 255, 0.2)",
+        "borderColor": "rgba(0, 123, 255, 1)",
+        "pointBackgroundColor": "rgba(0, 123, 255, 1)"
+      }, {
+        "label": "Jugador B",
+        "data": [70, 80, 60, 75, 85],
+        "backgroundColor": "rgba(255, 99, 132, 0.2)",
+        "borderColor": "rgba(255, 99, 132, 1)",
+        "pointBackgroundColor": "rgba(255, 99, 132, 1)"
+      }]
+    }
   },
-  "pieChart": {
-    "labels": ["Electrónica", "Ropa", "Alimentos", "Juguetes"],
-    "datasets": [{
-      "label": "Distribución de Ventas",
-      "data": [55, 25, 10, 10],
-      "backgroundColor": ["#FF6347", "#4CAF50", "#FF9800", "#2196F3"]
-    }]
-  },
-  "radarChart": {
-    "labels": ["Velocidad", "Fuerza", "Agilidad", "Resistencia", "Técnica"],
-    "datasets": [{
-      "label": "Jugador A",
-      "data": [80, 90, 70, 85, 95],
-      "backgroundColor": "rgba(0, 123, 255, 0.2)",
-      "borderColor": "rgba(0, 123, 255, 1)",
-      "pointBackgroundColor": "rgba(0, 123, 255, 1)"
-    }, {
-      "label": "Jugador B",
-      "data": [70, 80, 60, 75, 85],
-      "backgroundColor": "rgba(255, 99, 132, 0.2)",
-      "borderColor": "rgba(255, 99, 132, 1)",
-      "pointBackgroundColor": "rgba(255, 99, 132, 1)"
-    }]
-  },
-  "scatterChart": {
-    "datasets": [{
-      "label": "Datos de Ventas",
-      "data": [
-        { "x": 10, "y": 30 },
-        { "x": 15, "y": 50 },
-        { "x": 20, "y": 70 },
-        { "x": 25, "y": 90 },
-        { "x": 30, "y": 120 }
-      ],
-      "backgroundColor": "rgba(75, 192, 192, 1)"
-    }]
+  "Estadísticas de Ventas": {
+    "barChart": {
+      "labels": ["A", "B", "C", "D"],
+      "datasets": [{
+        "label": "Calificación por Categoría",
+        "data": [80, 90, 70, 85],
+        "backgroundColor": ["#FF5733", "#33FF57", "#3357FF", "#FF33A8"]
+      }]
+    },
+    "scatterChart": {
+      "datasets": [{
+        "label": "Datos de Ventas",
+        "data": [
+          { "x": 10, "y": 30 },
+          { "x": 15, "y": 50 },
+          { "x": 20, "y": 70 },
+          { "x": 25, "y": 90 },
+          { "x": 30, "y": 120 }
+        ],
+        "backgroundColor": "rgba(75, 192, 192, 1)"
+      }]
+    }
   }
 }
