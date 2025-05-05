@@ -10,9 +10,9 @@
       font-family: Arial, sans-serif;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
       background-color: #f4f4f4;
       margin: 0;
       padding: 20px;
@@ -38,6 +38,25 @@
 
     .category {
       margin-bottom: 40px;
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      padding-bottom: 56.25%; /* 16:9 */
+      height: 0;
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
     }
   </style>
 </head>
@@ -69,13 +88,21 @@
     </div>
   </div>
 
+  <div class="category">
+    <h2>Video Explicativo</h2>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/2O8F0sOvTkI" 
+              title="Video de YouTube"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen></iframe>
+    </div>
+  </div>
+
   <script>
-    // Función para cargar el archivo JSON
     async function loadData() {
       const response = await fetch('data.json');
       const data = await response.json();
 
-      // Crear los gráficos con los datos del JSON
       new Chart(document.getElementById('pieChart').getContext('2d'), {
         type: 'pie',
         data: data.pieChart,
@@ -122,7 +149,6 @@
       });
     }
 
-    // Llamada a la función para cargar los datos al iniciar la página
     loadData();
   </script>
 </body>
