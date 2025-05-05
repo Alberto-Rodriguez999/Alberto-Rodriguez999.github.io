@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gráficos con Chart.js</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -13,6 +14,7 @@
       height: 100vh;
       background-color: #f4f4f4;
       margin: 0;
+      flex-direction: column;
     }
 
     canvas {
@@ -21,49 +23,54 @@
       margin: 20px;
     }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+  <canvas id="pieChart" width="400" height="200"></canvas>
   <canvas id="lineChart" width="400" height="200"></canvas>
   <canvas id="barChart" width="400" height="200"></canvas>
-  <canvas id="pieChart" width="400" height="200"></canvas>
   <canvas id="radarChart" width="400" height="200"></canvas>
   <canvas id="scatterChart" width="400" height="200"></canvas>
 
   <script>
-    fetch('data.json')
-      .then(response => response.json())
-      .then(data => {
-        const lineChart = new Chart(document.getElementById('lineChart').getContext('2d'), {
-          type: 'line',
-          data: data.lineChart,
-          options: { responsive: true, scales: { y: { beginAtZero: true } } }
-        });
+    // Función para cargar el archivo JSON
+    async function loadData() {
+      const response = await fetch('data.json');
+      const data = await response.json();
 
-        const barChart = new Chart(document.getElementById('barChart').getContext('2d'), {
-          type: 'bar',
-          data: data.barChart,
-          options: { responsive: true, scales: { y: { beginAtZero: true } } }
-        });
-
-        const pieChart = new Chart(document.getElementById('pieChart').getContext('2d'), {
-          type: 'pie',
-          data: data.pieChart,
-          options: { responsive: true }
-        });
-
-        const radarChart = new Chart(document.getElementById('radarChart').getContext('2d'), {
-          type: 'radar',
-          data: data.radarChart,
-          options: { responsive: true, scale: { ticks: { beginAtZero: true, max: 100 } } }
-        });
-
-        const scatterChart = new Chart(document.getElementById('scatterChart').getContext('2d'), {
-          type: 'scatter',
-          data: data.scatterChart,
-          options: { responsive: true, scales: { x: { title: { display: true, text: 'Tiempo (meses)' } }, y: { title: { display: true, text: 'Ventas' } } } }
-        });
+      // Crear los gráficos con los datos del JSON
+      new Chart(document.getElementById('pieChart').getContext('2d'), {
+        type: 'pie',
+        data: data.pieChart,
+        options: { responsive: true }
       });
+
+      new Chart(document.getElementById('lineChart').getContext('2d'), {
+        type: 'line',
+        data: data.lineChart,
+        options: { responsive: true, scales: { y: { beginAtZero: true } } }
+      });
+
+      new Chart(document.getElementById('barChart').getContext('2d'), {
+        type: 'bar',
+        data: data.barChart,
+        options: { responsive: true, scales: { y: { beginAtZero: true } } }
+      });
+
+      new Chart(document.getElementById('radarChart').getContext('2d'), {
+        type: 'radar',
+        data: data.radarChart,
+        options: { responsive: true, scale: { ticks: { beginAtZero: true, max: 100 } } }
+      });
+
+      new Chart(document.getElementById('scatterChart').getContext('2d'), {
+        type: 'scatter',
+        data: data.scatterChart,
+        options: { responsive: true, scales: { x: { title: { display: true, text: 'Tiempo (meses)' } }, y: { title: { display: true, text: 'Ventas' } } } }
+      });
+    }
+
+    // Llamada a la función para cargar los datos al iniciar la página
+    loadData();
   </script>
 </body>
 </html>
