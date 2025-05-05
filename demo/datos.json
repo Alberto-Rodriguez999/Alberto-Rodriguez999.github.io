@@ -1,0 +1,6 @@
+[
+    { "genero": "Épico", "cantidad": 12 },
+    { "genero": "Lírico", "cantidad": 8 },
+    { "genero": "Dramático", "cantidad": 5 },
+    { "genero": "Didáctico", "cantidad": 3 }
+  ]  
