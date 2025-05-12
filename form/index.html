@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario de contacto</title>
+  <style>
+    article { display: none; }
+    article.active { display: block; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Soy un formulario básico</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#" onclick="mostrar('formulario')">Formulario</a></li>
+      <li><a href="#" onclick="mostrar('checks')">Checks</a></li>
+      <li><a href="https://www.youtube.com/" target="_blank">Esto te lleva a YouTube</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <article id="formulario" class="active">
+      <h2>Formulario de contacto</h2>
+      <form method="GET" action="#">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="ejemplo@correo.com"><br><br>
+
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre"><br><br>
+
+        <label for="pais">País:</label>
+        <select id="pais" name="pais">
+          <option value="es">España</option>
+          <option value="uk">Inglaterra</option>
+          <option value="br">Brasil</option>
+          <option value="fr">Francia</option>
+          <option value="ma">Marruecos</option>
+        </select>
+      </form>
+    </article>
+
+    <article id="checks">
+      <h2>Marca lo que tengas</h2>
+      <p><label><input type="checkbox" name="certificados" value="devops"> Certificado de DEVOPS</label></p>
+      <p><label><input type="checkbox" name="certificados" value="betis"> Carnet Betis</label></p>
+      <p><label><input type="checkbox" name="certificados" value="discapacidad"> Carnet 33%</label></p>
+      <p><label><input type="checkbox" name="certificados" value="youtube"> Canal de YouTube</label></p>
+    </article>
+  </main>
+
+  <script>
+    function mostrar(id) {
+      document.querySelectorAll('article').forEach(el => el.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
