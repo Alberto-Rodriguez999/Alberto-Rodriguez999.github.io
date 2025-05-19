@@ -3,153 +3,384 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gráficos con Chart.js</title>
+  <title>Dashboard de Análisis</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      background-color: #f4f4f4;
+    :root {
+      --primary-color: #3498db;
+      --secondary-color: #2c3e50;
+      --accent-color: #e74c3c;
+      --light-bg: #f9f9f9;
+      --dark-bg: #ecf0f1;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    * {
+      box-sizing: border-box;
       margin: 0;
-      padding: 20px;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, var(--light-bg), var(--dark-bg));
+      color: #333;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 0;
+      margin: 0;
+    }
+
+    header {
+      background-color: var(--secondary-color);
+      color: white;
+      text-align: center;
+      padding: 1.5rem 0;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .container {
+      width: 95%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .chart-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+    
+    .chart-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .chart-header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1rem;
+      font-size: 1.2rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+    }
+    
+    .chart-header i {
+      margin-right: 10px;
     }
 
     .chart-container {
+      padding: 1.5rem;
       width: 100%;
-      max-width: 600px;
-      margin: 20px 0;
+      height: 280px;
+      position: relative;
     }
 
-    canvas {
-      width: 100% !important;
-      height: auto !important;
-      border: 2px solid #ccc;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    h2 {
-      text-align: center;
-      color: #333;
-    }
-
-    .category {
-      width: 100%;
-      margin-bottom: 60px;
+    .video-section {
+      background-color: var(--secondary-color);
+      padding: 3rem 0;
+      margin-top: 2rem;
     }
 
     .video-container {
       width: 100%;
-      max-width: 1200px;
+      max-width: 1000px;
       margin: 0 auto;
+      box-shadow: var(--shadow);
+      border-radius: 8px;
+      overflow: hidden;
     }
 
-    video {
+    .video-title {
+      color: white;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+    }
+
+    .responsive-youtube {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      height: 0;
+      overflow: hidden;
+    }
+
+    .responsive-youtube iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: 700px;
-      object-fit: cover;
-      border: 2px solid #ccc;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      height: 100%;
+      border: none;
+      border-radius: 8px;
+    }
+
+    footer {
+      background-color: var(--secondary-color);
+      color: white;
+      text-align: center;
+      padding: 1.5rem 0;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard {
+        grid-template-columns: 1fr;
+      }
+      
+      .chart-container {
+        height: 250px;
+      }
+      
+      .video-container {
+        width: 95%;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="category">
-    <h2>Ventas</h2>
-    <div class="chart-container">
-      <canvas id="pieChart"></canvas>
-    </div>
-    <div class="chart-container">
-      <canvas id="lineChart"></canvas>
+  <header>
+    <h1>Dashboard de Análisis</h1>
+  </header>
+
+  <div class="container">
+    <div class="dashboard">
+      <div class="chart-card">
+        <div class="chart-header">
+          <i class="fas fa-chart-pie"></i>
+          <span>Distribución de Ventas</span>
+        </div>
+        <div class="chart-container">
+          <canvas id="pieChart"></canvas>
+        </div>
+      </div>
+      
+      <div class="chart-card">
+        <div class="chart-header">
+          <i class="fas fa-chart-line"></i>
+          <span>Tendencia de Ventas</span>
+        </div>
+        <div class="chart-container">
+          <canvas id="lineChart"></canvas>
+        </div>
+      </div>
+      
+      <div class="chart-card">
+        <div class="chart-header">
+          <i class="fas fa-chart-radar"></i>
+          <span>Rendimiento de Jugadores</span>
+        </div>
+        <div class="chart-container">
+          <canvas id="radarChart"></canvas>
+        </div>
+      </div>
+      
+      <div class="chart-card">
+        <div class="chart-header">
+          <i class="fas fa-chart-bar"></i>
+          <span>Estadísticas de Ventas</span>
+        </div>
+        <div class="chart-container">
+          <canvas id="barChart"></canvas>
+        </div>
+      </div>
+      
+      <div class="chart-card">
+        <div class="chart-header">
+          <i class="fas fa-braille"></i>
+          <span>Correlación de Datos</span>
+        </div>
+        <div class="chart-container">
+          <canvas id="scatterChart"></canvas>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="category">
-    <h2>Rendimiento de Jugadores</h2>
-    <div class="chart-container">
-      <canvas id="radarChart"></canvas>
-    </div>
-  </div>
-
-  <div class="category">
-    <h2>Estadísticas de Ventas</h2>
-    <div class="chart-container">
-      <canvas id="barChart"></canvas>
-    </div>
-    <div class="chart-container">
-      <canvas id="scatterChart"></canvas>
-    </div>
-  </div>
-
-  <div class="category">
-    <h2>Video Explicativo</h2>
+  <section class="video-section">
+    <h2 class="video-title">Video Explicativo</h2>
     <div class="video-container">
-      <video autoplay loop muted playsinline>
-        <source src="insertar_test_1.mp4" type="video/mp4">
-        Tu navegador no soporta el elemento de video.
-      </video>
+      <div class="responsive-youtube">
+        <!-- Reemplaza el ID "dQw4w9WgXcQ" con el ID de tu video de YouTube -->
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                title="Video Explicativo" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+        </iframe>
+      </div>
     </div>
-  </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Dashboard de Análisis | Todos los derechos reservados</p>
+  </footer>
 
   <script>
     async function loadData() {
-      const response = await fetch('data.json');
-      const data = await response.json();
-
-      new Chart(document.getElementById('pieChart').getContext('2d'), {
-        type: 'pie',
-        data: data["Ventas"].pieChart,
-        options: { responsive: true }
-      });
-
-      new Chart(document.getElementById('lineChart').getContext('2d'), {
-        type: 'line',
-        data: data["Ventas"].lineChart,
-        options: { 
-          responsive: true,
-          scales: { y: { beginAtZero: true } }
-        }
-      });
-
-      new Chart(document.getElementById('radarChart').getContext('2d'), {
-        type: 'radar',
-        data: data["Rendimiento de Jugadores"].radarChart,
-        options: { 
-          responsive: true,
-          scales: {
-            r: {
-              beginAtZero: true,
-              max: 100
+      try {
+        const response = await fetch('data.json');
+        const data = await response.json();
+        
+        // Pie Chart
+        new Chart(document.getElementById('pieChart').getContext('2d'), {
+          type: 'pie',
+          data: data["Ventas"].pieChart,
+          options: { 
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'bottom',
+                labels: {
+                  padding: 20
+                }
+              }
             }
           }
-        }
-      });
-
-      new Chart(document.getElementById('barChart').getContext('2d'), {
-        type: 'bar',
-        data: data["Estadísticas de Ventas"].barChart,
-        options: { 
-          responsive: true,
-          scales: { y: { beginAtZero: true } }
-        }
-      });
-
-      new Chart(document.getElementById('scatterChart').getContext('2d'), {
-        type: 'scatter',
-        data: data["Estadísticas de Ventas"].scatterChart,
-        options: { 
-          responsive: true,
-          scales: { 
-            x: { title: { display: true, text: 'Tiempo (meses)' } },
-            y: { title: { display: true, text: 'Ventas' } }
+        });
+        
+        // Line Chart
+        new Chart(document.getElementById('lineChart').getContext('2d'), {
+          type: 'line',
+          data: data["Ventas"].lineChart,
+          options: { 
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: { 
+              y: { 
+                beginAtZero: true,
+                grid: {
+                  color: 'rgba(0, 0, 0, 0.05)'
+                }
+              },
+              x: {
+                grid: {
+                  display: false
+                }
+              }
+            },
+            elements: {
+              line: {
+                tension: 0.4
+              }
+            }
           }
-        }
-      });
+        });
+        
+        // Radar Chart
+        new Chart(document.getElementById('radarChart').getContext('2d'), {
+          type: 'radar',
+          data: data["Rendimiento de Jugadores"].radarChart,
+          options: { 
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              r: {
+                beginAtZero: true,
+                max: 100,
+                ticks: {
+                  stepSize: 20
+                },
+                pointLabels: {
+                  font: {
+                    size: 12
+                  }
+                }
+              }
+            },
+            elements: {
+              line: {
+                borderWidth: 2
+              }
+            }
+          }
+        });
+        
+        // Bar Chart
+        new Chart(document.getElementById('barChart').getContext('2d'), {
+          type: 'bar',
+          data: data["Estadísticas de Ventas"].barChart,
+          options: { 
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: { 
+              y: { 
+                beginAtZero: true,
+                grid: {
+                  color: 'rgba(0, 0, 0, 0.05)'
+                }
+              },
+              x: {
+                grid: {
+                  display: false
+                }
+              }
+            },
+            barPercentage: 0.7
+          }
+        });
+        
+        // Scatter Chart
+        new Chart(document.getElementById('scatterChart').getContext('2d'), {
+          type: 'scatter',
+          data: data["Estadísticas de Ventas"].scatterChart,
+          options: { 
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: { 
+              x: { 
+                title: { 
+                  display: true, 
+                  text: 'Tiempo (meses)',
+                  font: {
+                    weight: 'bold'
+                  }
+                },
+                grid: {
+                  color: 'rgba(0, 0, 0, 0.05)'
+                }
+              },
+              y: { 
+                title: { 
+                  display: true,
+                  text: 'Ventas',
+                  font: {
+                    weight: 'bold'
+                  }
+                },
+                grid: {
+                  color: 'rgba(0, 0, 0, 0.05)'
+                }
+              }
+            }
+          }
+        });
+      } catch (error) {
+        console.error('Error cargando los datos:', error);
+        document.querySelectorAll('.chart-container').forEach(container => {
+          container.innerHTML = '<p style="text-align: center; color: red;">Error al cargar los datos</p>';
+        });
+      }
     }
-
-    loadData();
+    
+    document.addEventListener('DOMContentLoaded', loadData);
   </script>
 </body>
 </html>
