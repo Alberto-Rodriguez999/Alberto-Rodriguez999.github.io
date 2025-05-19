@@ -41,22 +41,16 @@
     }
 
     .video-container {
-      position: relative;
       width: 100%;
-      max-width: 600px;
-      padding-bottom: 56.25%; /* 16:9 */
-      height: 0;
-      overflow: hidden;
-      margin-bottom: 40px;
+      max-width: 800px;
+      margin: 0 auto 40px;
     }
 
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 500%;
-      height: 500%;
-      border: 0;
+    video {
+      width: 100%;
+      height: auto;
+      border: 2px solid #ccc;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
   </style>
 </head>
@@ -91,10 +85,10 @@
   <div class="category">
     <h2>Video Explicativo</h2>
     <div class="video-container">
-      <iframe src="https://www.youtube.com/embed/2O8F0sOvTkI" 
-              title="Video de YouTube"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowfullscreen></iframe>
+      <video autoplay loop muted playsinline>
+        <source src="insertar_test_1.mp4" type="video/mp4">
+        Tu navegador no soporta el elemento de video.
+      </video>
     </div>
   </div>
 
