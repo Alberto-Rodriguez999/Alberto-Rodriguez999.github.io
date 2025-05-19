@@ -6,6 +6,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
+  <meta name="description" content="Dashboard interactivo con análisis visual de datos, gráficas dinámicas y video explicativo. Visualiza ventas, rendimiento y correlaciones de forma clara.">
   <title>Dashboard de Análisis</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha384-xh6jZ7XbsQ8YgtygHC2D0EkFiA3JZd02TD0fDlYktB9IEA7B4RmO3F7glNAZ2Xow" crossorigin="anonymous">
@@ -18,11 +19,13 @@
       --dark-bg: #ecf0f1;
       --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(to bottom right, var(--light-bg), var(--dark-bg));
@@ -30,6 +33,7 @@
       line-height: 1.6;
       min-height: 100vh;
     }
+
     header {
       background-color: var(--secondary-color);
       color: white;
@@ -38,22 +42,26 @@
       margin-bottom: 2rem;
       box-shadow: var(--shadow);
     }
+
     header h1 {
       margin: 0;
       font-size: 2rem;
     }
+
     .container {
       width: 95%;
       max-width: 1400px;
       margin: 0 auto;
       padding: 0 15px;
     }
+
     .dashboard {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
       margin-bottom: 3rem;
     }
+
     .chart-card {
       background-color: #fff;
       border-radius: 8px;
@@ -61,9 +69,11 @@
       overflow: hidden;
       transition: transform 0.3s ease;
     }
+
     .chart-card:hover {
       transform: translateY(-5px);
     }
+
     .chart-header {
       background-color: var(--primary-color);
       color: white;
@@ -73,20 +83,24 @@
       display: flex;
       align-items: center;
     }
+
     .chart-header i {
       margin-right: 10px;
     }
+
     .chart-container {
       padding: 1.5rem;
       width: 100%;
       height: 280px;
       position: relative;
     }
+
     .video-section {
       background-color: var(--secondary-color);
       padding: 3rem 0;
       margin-top: 2rem;
     }
+
     .video-container {
       width: 100%;
       max-width: 1000px;
@@ -94,20 +108,22 @@
       box-shadow: var(--shadow);
       border-radius: 8px;
       overflow: hidden;
+      background-color: #000;
     }
+
     .video-title {
       color: white;
       text-align: center;
       margin-bottom: 1.5rem;
       font-size: 2rem;
     }
-    .custom-video {
-      display: block;
+
+    .responsive-video video {
       width: 100%;
       height: auto;
-      border: none;
-      border-radius: 8px;
+      display: block;
     }
+
     footer {
       background-color: var(--secondary-color);
       color: white;
@@ -115,13 +131,16 @@
       padding: 1.5rem 0;
       margin-top: 2rem;
     }
+
     @media (max-width: 768px) {
       .dashboard {
         grid-template-columns: 1fr;
       }
+
       .chart-container {
         height: 250px;
       }
+
       .video-container {
         width: 95%;
       }
@@ -133,29 +152,170 @@
     <h1>Dashboard de Análisis</h1>
   </header>
 
-  <div class="container" role="main">
-    <div class="dashboard">
-      <!-- Gráficas aquí -->
-      <!-- (No modificado por brevedad) -->
-    </div>
-  </div>
+  <main class="container" role="main">
+    <section class="dashboard" aria-label="Gráficas del dashboard">
+      <div class="chart-card">
+        <div class="chart-header">
+          <i class="fas fa-chart-pie" aria-hidden="true"></i>
+          <span>Distribución de Ventas</span>
+        </div>
+        <div class="chart-container">
+          <canvas id="pieChart" aria-label="Gráfico circular de distribución de ventas" role="img"></canvas>
+        </div>
+      </div>
 
-  <section class="video-section" aria-labelledby="video-titulo">
-    <h2 id="video-titulo" class="video-title">Reproducción de Video</h2>
+      <div class="chart-card">
+        <div class="chart-header">
+          <i class="fas fa-chart-line" aria-hidden="true"></i>
+          <span>Tendencia de Ventas</span>
+        </div>
+        <div class="chart-container">
+          <canvas id="lineChart" aria-label="Gráfico de línea sobre la tendencia de ventas" role="img"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-header">
+          <i class="fas fa-chart-radar" aria-hidden="true"></i>
+          <span>Rendimiento de Jugadores</span>
+        </div>
+        <div class="chart-container">
+          <canvas id="radarChart" aria-label="Gráfico radar del rendimiento de jugadores" role="img"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-header">
+          <i class="fas fa-chart-bar" aria-hidden="true"></i>
+          <span>Estadísticas de Ventas</span>
+        </div>
+        <div class="chart-container">
+          <canvas id="barChart" aria-label="Gráfico de barras con estadísticas de ventas" role="img"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-header">
+          <i class="fas fa-braille" aria-hidden="true"></i>
+          <span>Correlación de Datos</span>
+        </div>
+        <div class="chart-container">
+          <canvas id="scatterChart" aria-label="Gráfico de dispersión para la correlación de datos" role="img"></canvas>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section class="video-section" aria-label="Video explicativo del análisis">
+    <h2 class="video-title">Video Explicativo</h2>
     <div class="video-container">
-      <video class="custom-video" controls preload="metadata">
-        <source src="video/musical_caballo.mp4" type="video/mp4">
-        Tu navegador no soporta la reproducción de video.
-      </video>
+      <div class="responsive-video">
+        <video controls preload="metadata" aria-label="Video musical caballo">
+          <source src="https://github.com/Alberto-Rodriguez999/Alberto-Rodriguez999.github.io/raw/refs/heads/main/video/musical_caballo.mp4" type="video/mp4">
+          Tu navegador no soporta el elemento de video.
+        </video>
+      </div>
     </div>
   </section>
 
-  <footer role="contentinfo">
+  <footer>
     <p>&copy; 2025 Dashboard de Análisis | Todos los derechos reservados</p>
   </footer>
 
   <script>
-    // Código de gráficos (sin cambios)
+    async function loadData() {
+      try {
+        const response = await fetch('data.json');
+        const data = await response.json();
+
+        new Chart(document.getElementById('pieChart').getContext('2d'), {
+          type: 'pie',
+          data: data["Ventas"].pieChart,
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'bottom',
+                labels: { padding: 20 }
+              }
+            }
+          }
+        });
+
+        new Chart(document.getElementById('lineChart').getContext('2d'), {
+          type: 'line',
+          data: data["Ventas"].lineChart,
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: { beginAtZero: true, grid: { color: 'rgba(0, 0, 0, 0.05)' } },
+              x: { grid: { display: false } }
+            },
+            elements: { line: { tension: 0.4 } }
+          }
+        });
+
+        new Chart(document.getElementById('radarChart').getContext('2d'), {
+          type: 'radar',
+          data: data["Rendimiento de Jugadores"].radarChart,
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              r: {
+                beginAtZero: true,
+                max: 100,
+                ticks: { stepSize: 20 },
+                pointLabels: { font: { size: 12 } }
+              }
+            },
+            elements: { line: { borderWidth: 2 } }
+          }
+        });
+
+        new Chart(document.getElementById('barChart').getContext('2d'), {
+          type: 'bar',
+          data: data["Estadísticas de Ventas"].barChart,
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: { beginAtZero: true, grid: { color: 'rgba(0, 0, 0, 0.05)' } },
+              x: { grid: { display: false } }
+            },
+            barPercentage: 0.7
+          }
+        });
+
+        new Chart(document.getElementById('scatterChart').getContext('2d'), {
+          type: 'scatter',
+          data: data["Estadísticas de Ventas"].scatterChart,
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              x: {
+                title: { display: true, text: 'Tiempo (meses)', font: { weight: 'bold' } },
+                grid: { color: 'rgba(0, 0, 0, 0.05)' }
+              },
+              y: {
+                title: { display: true, text: 'Ventas', font: { weight: 'bold' } },
+                grid: { color: 'rgba(0, 0, 0, 0.05)' }
+              }
+            }
+          }
+        });
+      } catch (error) {
+        console.error('Error cargando los datos:', error);
+        document.querySelectorAll('.chart-container').forEach(container => {
+          container.innerHTML = '<p style="text-align: center; color: red;">Error al cargar los datos</p>';
+        });
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadData);
   </script>
 </body>
 </html>
