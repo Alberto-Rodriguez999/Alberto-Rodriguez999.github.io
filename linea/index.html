@@ -1,133 +1,106 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
   <title>Dashboard de Análisis</title>
-  <meta name="description" content="Dashboard interactivo con análisis de ventas y rendimiento de jugadores, con gráficos y video explicativo." />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-    integrity="sha384-xh6jZ7XbsQ8YgtygHC2D0EkFiA3JZd02TD0fDlYktB9IEA7B4RmO3F7glNAZ2Xow"
-    crossorigin="anonymous"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
   <style>
     :root {
       --primary-color: #3498db;
-      --secondary-color: #2c3e50;
-      --accent-color: #e74c3c;
-      --light-bg: #f9f9f9;
+@@ -18,21 +18,19 @@
       --dark-bg: #ecf0f1;
       --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
+    
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+    
+
     body {
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(to bottom right, var(--light-bg), var(--dark-bg));
       color: #333;
       line-height: 1.6;
       min-height: 100vh;
-    }
-    header {
-      background-color: var(--secondary-color);
-      color: white;
-      text-align: center;
-      padding: 1.5rem 0;
-      margin-bottom: 2rem;
-      box-shadow: var(--shadow);
-    }
-    header h1 {
+      padding: 0;
       margin: 0;
+    }
+
+    header {
+@@ -49,7 +47,7 @@
       font-size: 2rem;
     }
+
     .container {
+    main.container {
       width: 95%;
       max-width: 1400px;
       margin: 0 auto;
-      padding: 0 15px;
-    }
-    .dashboard {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-bottom: 3rem;
-    }
-    .chart-card {
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: var(--shadow);
+@@ -70,7 +68,7 @@
       overflow: hidden;
       transition: transform 0.3s ease;
     }
+    
+
     .chart-card:hover {
       transform: translateY(-5px);
     }
-    .chart-header {
-      background-color: var(--primary-color);
-      color: white;
-      padding: 1rem;
-      font-size: 1.2rem;
-      font-weight: 500;
+@@ -84,7 +82,7 @@
       display: flex;
       align-items: center;
     }
+    
+
     .chart-header i {
       margin-right: 10px;
     }
-    .chart-container {
-      padding: 1.5rem;
-      width: 100%;
-      height: 280px;
-      position: relative;
-    }
-    .video-section {
-      background-color: var(--secondary-color);
-      padding: 3rem 0;
-      margin-top: 2rem;
-    }
-    .video-container {
-      width: 100%;
-      max-width: 1000px;
-      margin: 0 auto;
+@@ -109,6 +107,7 @@
       box-shadow: var(--shadow);
       border-radius: 8px;
       overflow: hidden;
+      background: #000;
     }
+
     .video-title {
-      color: white;
-      text-align: center;
-      margin-bottom: 1.5rem;
+@@ -118,6 +117,12 @@
       font-size: 2rem;
     }
-    .custom-video {
-      display: block;
+
+    video {
       width: 100%;
       height: auto;
-      border: none;
-      border-radius: 8px;
+      display: block;
     }
+
     footer {
       background-color: var(--secondary-color);
       color: white;
-      text-align: center;
-      padding: 1.5rem 0;
-      margin-top: 2rem;
-    }
-    @media (max-width: 768px) {
+@@ -130,87 +135,91 @@
       .dashboard {
         grid-template-columns: 1fr;
       }
+      
+
       .chart-container {
         height: 250px;
       }
+      
+
       .video-container {
         width: 95%;
       }
@@ -136,135 +109,163 @@
 </head>
 <body>
   <header>
+  <header role="banner">
     <h1>Dashboard de Análisis</h1>
   </header>
 
+  <div class="container">
   <main class="container" role="main">
-    <section class="dashboard" aria-label="Gráficas del dashboard">
-      <article class="chart-card">
-        <header class="chart-header">
-          <i class="fas fa-chart-pie" aria-hidden="true"></i>
+    <div class="dashboard">
+      <!-- Gráficos -->
+      <div class="chart-card">
+        <div class="chart-header">
+          <i class="fas fa-chart-pie"></i>
           <span>Distribución de Ventas</span>
-        </header>
-        <div class="chart-container">
-          <canvas id="pieChart" aria-label="Gráfico circular de distribución de ventas" role="img"></canvas>
         </div>
-      </article>
+        <div class="chart-container">
+          <canvas id="pieChart"></canvas>
+          <canvas id="pieChart" aria-label="Gráfico de distribución de ventas" role="img"></canvas>
+        </div>
+      </div>
+      
 
-      <article class="chart-card">
-        <header class="chart-header">
-          <i class="fas fa-chart-line" aria-hidden="true"></i>
+      <div class="chart-card">
+        <div class="chart-header">
+          <i class="fas fa-chart-line"></i>
           <span>Tendencia de Ventas</span>
-        </header>
-        <div class="chart-container">
-          <canvas id="lineChart" aria-label="Gráfico de línea sobre la tendencia de ventas" role="img"></canvas>
         </div>
-      </article>
+        <div class="chart-container">
+          <canvas id="lineChart"></canvas>
+          <canvas id="lineChart" aria-label="Gráfico de tendencia de ventas" role="img"></canvas>
+        </div>
+      </div>
+      
 
-      <article class="chart-card">
-        <header class="chart-header">
-          <i class="fas fa-chart-radar" aria-hidden="true"></i>
+      <div class="chart-card">
+        <div class="chart-header">
+          <i class="fas fa-chart-radar"></i>
           <span>Rendimiento de Jugadores</span>
-        </header>
-        <div class="chart-container">
-          <canvas id="radarChart" aria-label="Gráfico radar del rendimiento de jugadores" role="img"></canvas>
         </div>
-      </article>
-
-      <article class="chart-card">
-        <header class="chart-header">
-          <i class="fas fa-chart-bar" aria-hidden="true"></i>
-          <span>Estadísticas de Ventas</span>
-        </header>
         <div class="chart-container">
+          <canvas id="radarChart"></canvas>
+          <canvas id="radarChart" aria-label="Gráfico de radar de rendimiento" role="img"></canvas>
+        </div>
+      </div>
+      
+
+      <div class="chart-card">
+        <div class="chart-header">
+          <i class="fas fa-chart-bar"></i>
+          <span>Estadísticas de Ventas</span>
+        </div>
+        <div class="chart-container">
+          <canvas id="barChart"></canvas>
           <canvas id="barChart" aria-label="Gráfico de barras de estadísticas de ventas" role="img"></canvas>
         </div>
-      </article>
+      </div>
+      
 
-      <article class="chart-card">
-        <header class="chart-header">
-          <i class="fas fa-braille" aria-hidden="true"></i>
+      <div class="chart-card">
+        <div class="chart-header">
+          <i class="fas fa-braille"></i>
           <span>Correlación de Datos</span>
-        </header>
+        </div>
         <div class="chart-container">
+          <canvas id="scatterChart"></canvas>
           <canvas id="scatterChart" aria-label="Gráfico de dispersión de correlación de datos" role="img"></canvas>
         </div>
-      </article>
-    </section>
+      </div>
+    </div>
+  </div>
   </main>
 
-  <section class="video-section" aria-labelledby="video-titulo">
-    <h2 id="video-titulo" class="video-title">Reproducción de Video</h2>
+  <section class="video-section">
+    <h2 class="video-title">Video Musical</h2>
+  <section class="video-section" aria-labelledby="video-title">
+    <h2 id="video-title" class="video-title">Video Musical</h2>
     <div class="video-container">
-      <video class="custom-video" controls preload="metadata" aria-describedby="video-description">
-        <source src="video/musical_caballo.mp4" type="video/mp4" />
-        Tu navegador no soporta la reproducción de video.
+      <video controls width="100%" style="display: block; border-radius: 8px;">
+        <source src="https://github.com/Alberto-Rodriguez999/Alberto-Rodriguez999.github.io/raw/refs/heads/main/video/musical_caballo.mp4" type="video/mp4">
+        Tu navegador no soporta el elemento de video.
+      <video 
+        controls 
+        aria-label="Video musical caballo"
+        src="https://github.com/Alberto-Rodriguez999/Alberto-Rodriguez999.github.io/raw/refs/heads/main/video/musical_caballo.mp4"
+      >
+        Tu navegador no soporta el video HTML5.
       </video>
-      <p id="video-description" class="sr-only">Video mostrando contenido musical relacionado con un caballo.</p>
     </div>
   </section>
 
+  <footer>
   <footer role="contentinfo">
     <p>&copy; 2025 Dashboard de Análisis | Todos los derechos reservados</p>
   </footer>
 
-  <script>
-    async function loadData() {
+@@ -219,140 +228,35 @@ <h2 class="video-title">Video Musical</h2>
       try {
         const response = await fetch('data.json');
         const data = await response.json();
-
+        
         // Pie Chart
         new Chart(document.getElementById('pieChart').getContext('2d'), {
+
+        new Chart(document.getElementById('pieChart'), {
           type: 'pie',
-          data: data['Ventas'].pieChart,
-          options: {
+          data: data["Ventas"].pieChart,
+          options: { 
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
               legend: {
                 position: 'bottom',
                 labels: {
-                  padding: 20,
-                },
-              },
-            },
-          },
+                  padding: 20
+                }
+              }
+            }
+          }
+          options: { responsive: true, maintainAspectRatio: false }
         });
-
+        
         // Line Chart
         new Chart(document.getElementById('lineChart').getContext('2d'), {
+
+        new Chart(document.getElementById('lineChart'), {
           type: 'line',
-          data: data['Ventas'].lineChart,
-          options: {
+          data: data["Ventas"].lineChart,
+          options: { 
             responsive: true,
             maintainAspectRatio: false,
-            scales: {
-              y: {
+            scales: { 
+              y: { 
                 beginAtZero: true,
                 grid: {
-                  color: 'rgba(0, 0, 0, 0.05)',
-                },
+                  color: 'rgba(0, 0, 0, 0.05)'
+                }
               },
               x: {
                 grid: {
-                  display: false,
-                },
-              },
+                  display: false
+                }
+              }
             },
             elements: {
               line: {
-                tension: 0.4,
-              },
-            },
-          },
+                tension: 0.4
+              }
+            }
+          }
+          options: { responsive: true, maintainAspectRatio: false }
         });
-
+        
         // Radar Chart
         new Chart(document.getElementById('radarChart').getContext('2d'), {
+
+        new Chart(document.getElementById('radarChart'), {
           type: 'radar',
-          data: data['Rendimiento de Jugadores'].radarChart,
-          options: {
+          data: data["Rendimiento de Jugadores"].radarChart,
+          options: { 
             responsive: true,
             maintainAspectRatio: false,
             scales: {
@@ -272,30 +273,97 @@
                 beginAtZero: true,
                 max: 100,
                 ticks: {
-                  stepSize: 20,
+                  stepSize: 20
                 },
                 pointLabels: {
                   font: {
-                    size: 12,
-                  },
-                },
-              },
+                    size: 12
+                  }
+                }
+              }
             },
             elements: {
               line: {
-                borderWidth: 2,
-              },
-            },
-          },
+                borderWidth: 2
+              }
+            }
+          }
+          options: { responsive: true, maintainAspectRatio: false }
         });
-
+        
         // Bar Chart
         new Chart(document.getElementById('barChart').getContext('2d'), {
+
+        new Chart(document.getElementById('barChart'), {
           type: 'bar',
-          data: data['Estadísticas de Ventas'].barChart,
-          options: {
+          data: data["Estadísticas de Ventas"].barChart,
+          options: { 
             responsive: true,
             maintainAspectRatio: false,
-            scales: {
-              y: {
-                begin
+            scales: { 
+              y: { 
+                beginAtZero: true,
+                grid: {
+                  color: 'rgba(0, 0, 0, 0.05)'
+                }
+              },
+              x: {
+                grid: {
+                  display: false
+                }
+              }
+            },
+            barPercentage: 0.7
+          }
+          options: { responsive: true, maintainAspectRatio: false }
+        });
+        
+        // Scatter Chart
+        new Chart(document.getElementById('scatterChart').getContext('2d'), {
+
+        new Chart(document.getElementById('scatterChart'), {
+          type: 'scatter',
+          data: data["Estadísticas de Ventas"].scatterChart,
+          options: { 
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: { 
+              x: { 
+                title: { 
+                  display: true, 
+                  text: 'Tiempo (meses)',
+                  font: {
+                    weight: 'bold'
+                  }
+                },
+                grid: {
+                  color: 'rgba(0, 0, 0, 0.05)'
+                }
+              },
+              y: { 
+                title: { 
+                  display: true,
+                  text: 'Ventas',
+                  font: {
+                    weight: 'bold'
+                  }
+                },
+                grid: {
+                  color: 'rgba(0, 0, 0, 0.05)'
+                }
+              }
+            }
+          }
+          options: { responsive: true, maintainAspectRatio: false }
+        });
+      } catch (error) {
+        console.error('Error cargando los datos:', error);
+@@ -361,7 +265,7 @@ <h2 class="video-title">Video Musical</h2>
+        });
+      }
+    }
+    
+
+    document.addEventListener('DOMContentLoaded', loadData);
+  </script>
+</body>
