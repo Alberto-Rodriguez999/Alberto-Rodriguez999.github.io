@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <title>Dashboard de Análisis</title>
+  <meta name="description" content="Dashboard interactivo con análisis de ventas y rendimiento de jugadores, con gráficos y video explicativo." />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha384-xh6jZ7XbsQ8YgtygHC2D0EkFiA3JZd02TD0fDlYktB9IEA7B4RmO3F7glNAZ2Xow" crossorigin="anonymous">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha384-xh6jZ7XbsQ8YgtygHC2D0EkFiA3JZd02TD0fDlYktB9IEA7B4RmO3F7glNAZ2Xow"
+    crossorigin="anonymous"
+  />
   <style>
     :root {
       --primary-color: #3498db;
@@ -24,7 +30,7 @@
       padding: 0;
     }
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(to bottom right, var(--light-bg), var(--dark-bg));
       color: #333;
       line-height: 1.6;
@@ -133,20 +139,68 @@
     <h1>Dashboard de Análisis</h1>
   </header>
 
-  <div class="container" role="main">
-    <div class="dashboard">
-      <!-- Gráficas aquí -->
-      <!-- (No modificado por brevedad) -->
-    </div>
-  </div>
+  <main class="container" role="main">
+    <section class="dashboard" aria-label="Gráficas del dashboard">
+      <article class="chart-card">
+        <header class="chart-header">
+          <i class="fas fa-chart-pie" aria-hidden="true"></i>
+          <span>Distribución de Ventas</span>
+        </header>
+        <div class="chart-container">
+          <canvas id="pieChart" aria-label="Gráfico circular de distribución de ventas" role="img"></canvas>
+        </div>
+      </article>
+
+      <article class="chart-card">
+        <header class="chart-header">
+          <i class="fas fa-chart-line" aria-hidden="true"></i>
+          <span>Tendencia de Ventas</span>
+        </header>
+        <div class="chart-container">
+          <canvas id="lineChart" aria-label="Gráfico de línea sobre la tendencia de ventas" role="img"></canvas>
+        </div>
+      </article>
+
+      <article class="chart-card">
+        <header class="chart-header">
+          <i class="fas fa-chart-radar" aria-hidden="true"></i>
+          <span>Rendimiento de Jugadores</span>
+        </header>
+        <div class="chart-container">
+          <canvas id="radarChart" aria-label="Gráfico radar del rendimiento de jugadores" role="img"></canvas>
+        </div>
+      </article>
+
+      <article class="chart-card">
+        <header class="chart-header">
+          <i class="fas fa-chart-bar" aria-hidden="true"></i>
+          <span>Estadísticas de Ventas</span>
+        </header>
+        <div class="chart-container">
+          <canvas id="barChart" aria-label="Gráfico de barras de estadísticas de ventas" role="img"></canvas>
+        </div>
+      </article>
+
+      <article class="chart-card">
+        <header class="chart-header">
+          <i class="fas fa-braille" aria-hidden="true"></i>
+          <span>Correlación de Datos</span>
+        </header>
+        <div class="chart-container">
+          <canvas id="scatterChart" aria-label="Gráfico de dispersión de correlación de datos" role="img"></canvas>
+        </div>
+      </article>
+    </section>
+  </main>
 
   <section class="video-section" aria-labelledby="video-titulo">
     <h2 id="video-titulo" class="video-title">Reproducción de Video</h2>
     <div class="video-container">
-      <video class="custom-video" controls preload="metadata">
-        <source src="video/musical_caballo.mp4" type="video/mp4">
+      <video class="custom-video" controls preload="metadata" aria-describedby="video-description">
+        <source src="video/musical_caballo.mp4" type="video/mp4" />
         Tu navegador no soporta la reproducción de video.
       </video>
+      <p id="video-description" class="sr-only">Video mostrando contenido musical relacionado con un caballo.</p>
     </div>
   </section>
 
@@ -155,7 +209,93 @@
   </footer>
 
   <script>
-    // Código de gráficos (sin cambios)
-  </script>
-</body>
-</html>
+    async function loadData() {
+      try {
+        const response = await fetch('data.json');
+        const data = await response.json();
+
+        // Pie Chart
+        new Chart(document.getElementById('pieChart').getContext('2d'), {
+          type: 'pie',
+          data: data['Ventas'].pieChart,
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'bottom',
+                labels: {
+                  padding: 20,
+                },
+              },
+            },
+          },
+        });
+
+        // Line Chart
+        new Chart(document.getElementById('lineChart').getContext('2d'), {
+          type: 'line',
+          data: data['Ventas'].lineChart,
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                beginAtZero: true,
+                grid: {
+                  color: 'rgba(0, 0, 0, 0.05)',
+                },
+              },
+              x: {
+                grid: {
+                  display: false,
+                },
+              },
+            },
+            elements: {
+              line: {
+                tension: 0.4,
+              },
+            },
+          },
+        });
+
+        // Radar Chart
+        new Chart(document.getElementById('radarChart').getContext('2d'), {
+          type: 'radar',
+          data: data['Rendimiento de Jugadores'].radarChart,
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              r: {
+                beginAtZero: true,
+                max: 100,
+                ticks: {
+                  stepSize: 20,
+                },
+                pointLabels: {
+                  font: {
+                    size: 12,
+                  },
+                },
+              },
+            },
+            elements: {
+              line: {
+                borderWidth: 2,
+              },
+            },
+          },
+        });
+
+        // Bar Chart
+        new Chart(document.getElementById('barChart').getContext('2d'), {
+          type: 'bar',
+          data: data['Estadísticas de Ventas'].barChart,
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                begin
