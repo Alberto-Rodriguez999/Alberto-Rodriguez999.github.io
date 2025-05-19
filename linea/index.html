@@ -118,23 +118,6 @@
       font-size: 2rem;
     }
 
-    .responsive-youtube {
-      position: relative;
-      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-      height: 0;
-      overflow: hidden;
-    }
-
-    .responsive-youtube iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-      border-radius: 8px;
-    }
-
     footer {
       background-color: var(--secondary-color);
       color: white;
@@ -218,16 +201,12 @@
   </div>
 
   <section class="video-section">
-    <h2 class="video-title">Video de YouTube</h2>
+    <h2 class="video-title">Video Musical</h2>
     <div class="video-container">
-      <div class="responsive-youtube">
-        <!-- Video actualizado (Mayo 2025) -->
-        <iframe src="https://www.youtube.com/embed/oWUS1Um3RS8?version=3&amp;rel=0&amp;t=0&amp;nocache=123456" 
-                title="Video de YouTube" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-        </iframe>
-      </div>
+      <video controls width="100%" style="display: block; border-radius: 8px;">
+        <source src="https://github.com/Alberto-Rodriguez999/Alberto-Rodriguez999.github.io/raw/refs/heads/main/video/musical_caballo.mp4" type="video/mp4">
+        Tu navegador no soporta el elemento de video.
+      </video>
     </div>
   </section>
 
